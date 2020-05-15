@@ -1,22 +1,9 @@
 <template>
   <div class="container">
-    <ContentCard></ContentCard>
-    <content-card></content-card>
-    <content-card></content-card>
-    <content-card></content-card>
-    <content-card></content-card>
-    <content-card></content-card>
-    <content-card></content-card>
+  <router-view/>
   </div>
 </template>
 
 <script>
-import ContentCard from "./ContentCard.vue";
-export default {
-  components: {
-    ContentCard
-  }
-};
+export default {};
 </script>
-<style scoped>
-</style>

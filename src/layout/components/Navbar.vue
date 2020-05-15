@@ -27,6 +27,7 @@ export default {};
 .btn-ground {
   margin-top: 5px;
   float: right;
+  z-index: 2;
 }
 .navbaricon {
   width: 80px;

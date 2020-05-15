@@ -4,16 +4,15 @@ import Home from '../views/Home.vue'
 import Layout from '@/layout'
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     // component:() => import('@/views/Home'),
     component: Layout,
-    name: 'Home',
-    children:[{
-      path:'',
-      name:'index',
-      component: () => import(''),
+    children: [{
+      path: '',
+      name: 'Index',
+      component: () => import('@/views/index/index.vue'),
     }]
   },
   {
@@ -25,9 +24,20 @@ Vue.use(VueRouter)
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path:'/user',
-    component:Layout,
-    name:'UserInfo',
+    path: '/user',
+    component: Layout,
+    children: [{
+      path: '',
+      component: () => import('@/views/userinfo/index.vue'),
+    }]
+  },
+  {
+    path: '/login',
+    component: () => import('@/views/login/index.vue')
+  },
+  {
+    path: '/test',
+    component: () => import("@/views/test/index.vue"),
   }
 ]
 

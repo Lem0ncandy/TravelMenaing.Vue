@@ -9,8 +9,16 @@ export default {
 };
 </script>
 <style lang="stylus">
+#app {
+  height: 100%;
+}
 body {
+  height: 100%;
+  // height: 500px;
   margin: 0;
   padding: 0;
+}
+html{
+  height :100%;
 }
 </style>

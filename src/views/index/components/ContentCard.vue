@@ -45,7 +45,8 @@
   padding: 18px 0;
 }
 .box-card {
-  margin-bottom: 30px;
+  min-height: 140px;
+  
 }
 </style>
 <script>

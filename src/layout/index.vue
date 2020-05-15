@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import { Navbar, AppMain,ContentCard } from "./components";
+import { Navbar, AppMain } from "./components";
 export default {
   name: "Layout",
   components: {
     Navbar,
     AppMain,
-    ContentCard
+    
   }
 };
 </script>
