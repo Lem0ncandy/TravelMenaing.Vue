@@ -6,9 +6,8 @@
         :src="require('@/assets/logo.png')"
         class="logo"
       ></el-image>
-      <!-- <h1 class="title">旅意</h1> -->
       <el-tabs type="card" stretch>
-        <el-tab-pane>
+        <!-- <el-tab-pane>
           <span slot="label">登录</span>
           <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm">
             <el-form-item>
@@ -22,12 +21,21 @@
                 autocomplete="off"
               ></el-input>
             </el-form-item>
-            <el-button type="primary" round style="width:100%" @click.native.prevent="handleLogin">登录</el-button>
+            <el-button
+              type="primary"
+              round
+              style="width:100%"
+              @click.native.prevent="handleLogin"
+            >登录</el-button>
           </el-form>
+        </el-tab-pane>-->
+        <el-tab-pane>
+          <span slot="label">登录</span>
+          <login></login>
         </el-tab-pane>
         <el-tab-pane>
           <span slot="label">注册</span>
-          <el-form :model="registerForm" status-icon :rules="rules" ref="registerForm">
+          <!-- <el-form :model="registerForm" status-icon :rules="rules" ref="registerForm">
             <el-form-item>
               <el-input placeholder="用户名" v-model="registerForm.username" autocomplete="off"></el-input>
             </el-form-item>
@@ -48,14 +56,21 @@
               @click="submitForm('registerForm')"
               style="width:100%"
             >注册</el-button>
-          </el-form>
+          </el-form> -->
+          <Register></Register>
         </el-tab-pane>
       </el-tabs>
     </el-card>
   </div>
 </template>
 <script>
+import Login from "./components/login.vue";
+import Register from "./components/register.vue";
 export default {
+  components: {
+    Login,
+    Register
+  },
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === "") {
@@ -104,21 +119,23 @@ export default {
       });
     },
     handleLogin() {
-    this.$refs.loginForm.validate(valid => {
-      if (valid) {
-        this.$store.dispatch('user/login',this.loginForm).then(() => {
-          this.$router.push({path:this.redirect || '/'})
-        }).catch(() => {
-          // this.loading = false;
-        })
-      } else {
-        console.log('error submit!!');
-        return false;
-      }
-    });
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.$store
+            .dispatch("user/login", this.loginForm)
+            .then(() => {
+              this.$router.push({ path: this.redirect || "/" });
+            })
+            .catch(() => {
+              // this.loading = false;
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    }
   }
-  },
-  
 };
 </script>
 <style>

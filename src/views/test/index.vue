@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-button v-on:click="testAxios" type="info">btn</el-button>
+      <el-button v-on:click="testConnect" type="info">btn</el-button>
   </div>
 </template>
 
@@ -12,8 +12,8 @@ export default {
     }
   },
   methods: {
-    testAxios(){
-      this.$store.dispatch('test/testAxios',this.requestdata).then(() =>{
+    testConnect(){
+      this.$store.dispatch('test/testConnect',this.requestdata).then(() =>{
         console.log('sucess');
       })
     }

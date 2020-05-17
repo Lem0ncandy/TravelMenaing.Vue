@@ -4,6 +4,7 @@ import getters from './getters.js'
 
 import user from './modules/user'
 import test from './modules/test'
+import editor from './modules/editor'
 
 Vue.use(Vuex)
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   modules: {
     user,
     test,
+    editor,
   },
   getters
 })

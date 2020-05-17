@@ -1,8 +1,8 @@
-import { testAxios } from '@/api/test.js';
+import { testConnect } from '@/api/test.js';
 const actions = {
-    testAxios({ commit }, data) {
+    testConnect({ commit }, data) {
         return new Promise((resolve, reject) => {
-            testAxios(data).then(response => {
+            testConnect(data).then(response => {
                 const { data } = response;
                 resolve();
             }).catch(error => {

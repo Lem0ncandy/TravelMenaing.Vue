@@ -36,6 +36,14 @@ const routes = [
     component: () => import('@/views/login/index.vue')
   },
   {
+    path:'/editor',
+    component:() => import('@/views/markdowned/index.vue')
+  },
+  {
+    path:'/editortest',
+    component:() => import('@/views/markdowned/indextest.vue')
+  },
+  {
     path: '/test',
     component: () => import("@/views/test/index.vue"),
   }

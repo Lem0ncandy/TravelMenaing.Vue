@@ -2,7 +2,7 @@
   <div class="center">
     <img src="@/icons/nav-logo.png" class="navbaricon" />
     <el-row class="btn-ground">
-      <el-button type="success">成功按钮</el-button>
+      <el-button type="success">发布指南</el-button>
       <el-button round>登录</el-button>
       <el-button type="primary" round>注册</el-button>
     </el-row>
@@ -16,7 +16,11 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  methods:{
+    
+  }
+};
 </script>
 <style scoped>
 .center {

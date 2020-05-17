@@ -1,9 +1,9 @@
 import request from '@/utils/request.js'
 
-export function testAxios(data) {
+export function testConnect(data) {
     return request({
-        url: '/test/ReturnOk',
-        method: 'get',
+        url: '/test/TestConnect',
+        method: 'post',
         data: data
     })
 }
