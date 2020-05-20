@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: "App"
+  name: "App",
 };
 </script>
 <style lang="stylus">
@@ -20,5 +20,10 @@ body {
 }
 html{
   height :100%;
+}
+a{
+  cursor: pointer;
+    color: inherit;
+    text-decoration: none;
 }
 </style>

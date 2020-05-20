@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import getters from './getters.js'
+import getters from './getters'
 
 import user from './modules/user'
 import test from './modules/test'
@@ -8,7 +8,7 @@ import editor from './modules/editor'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
   },
   mutations: {
@@ -22,3 +22,4 @@ export default new Vuex.Store({
   },
   getters
 })
+export default store

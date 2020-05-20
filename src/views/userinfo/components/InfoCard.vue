@@ -63,11 +63,9 @@
   </div>
 </template>
 <script>
-import AppLink from "@/components/Link.vue";
 import ContentCard from "@/views/index/components/ContentCard.vue";
 export default {
   components: {
-    AppLink,
     ContentCard
   },
   methods:{

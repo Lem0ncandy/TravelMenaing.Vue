@@ -9,10 +9,16 @@ const routes = [
     path: '/',
     // component:() => import('@/views/Home'),
     component: Layout,
+    name: 'Layout',
     children: [{
       path: '',
       name: 'Index',
       component: () => import('@/views/index/index.vue'),
+    },
+    {
+      path: '/user',
+      name: 'User',
+      component: () => import('@/views/userinfo/index.vue'),
     }]
   },
   {
@@ -24,27 +30,34 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/user',
-    component: Layout,
+    path: '/',
+    component: () => import('@/layout/LoginAndSignup.vue'),
+    name: 'Loginlayout',
     children: [{
-      path: '',
-      component: () => import('@/views/userinfo/index.vue'),
-    }]
+      path: 'login',
+      name: 'Login',
+      component: () => import('@/views/login/components/login.vue'),
+    },
+    {
+      path: 'signup',
+      name: 'Signup',
+      component: () => import('@/views/login/components/signup.vue'),
+    },
+    ]
   },
   {
-    path: '/login',
-    component: () => import('@/views/login/index.vue')
+    path: '/editor',
+    name: 'Editor',
+    component: () => import('@/views/markdowned/index.vue')
   },
   {
-    path:'/editor',
-    component:() => import('@/views/markdowned/index.vue')
-  },
-  {
-    path:'/editortest',
-    component:() => import('@/views/markdowned/indextest.vue')
+    path: '/editortest',
+    name: 'EditorTest',
+    component: () => import('@/views/markdowned/indextest.vue')
   },
   {
     path: '/test',
+    name: 'Test',
     component: () => import("@/views/test/index.vue"),
   }
 ]
@@ -52,5 +65,12 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+export function namedRoutes(name, pramas) {
+  return {
+    name: name,
+    params: pramas
+  }
+}
 
 export default router
