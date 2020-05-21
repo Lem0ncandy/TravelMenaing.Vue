@@ -1,6 +1,6 @@
 export default {
-  height: "400px",
-  minHeight: "300px",
+  height: "100%",
+  // minHeight: "300px",
   previewStyle: "vertical",
   useCommandShortcut: true,
   useDefaultHTMLSanitizer: true,
