@@ -1,19 +1,30 @@
-import {uploadContent}from '@/api/editor.js'
+import { uploadContent } from '@/api/editor.js'
 
+const state = {
+    content: '',
+}
+const mutations = {
+}
+const getters = {
+    content: state => state.content
+}
 const actions = {
-    uploadContent({commit},content){
-        return new Promise((resolve,reject) =>{
-            uploadContent(content).then(response =>{
-                const {data} = response;
+    uploadGuide({ commit }, data) {
+        return new Promise((resolve, reject) => {
+            uploadContent(data).then(response => {
+                const { data } = response;
                 console.log(data);
                 resolve();
-            }).catch(error =>{
+            }).catch(error => {
                 reject(error);
             })
         })
-    }
+    },
 }
-export default{
-    namespaced:true,
+export default {
+    namespaced: true,
     actions,
+    mutations,
+    state,
+    getters,
 }

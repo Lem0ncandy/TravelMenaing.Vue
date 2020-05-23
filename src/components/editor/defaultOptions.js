@@ -6,6 +6,7 @@ export default {
   useDefaultHTMLSanitizer: true,
   usageStatistics: true,
   hideModeSwitch: false,
+  initialValue: 'Select this line and click the button above.',
   toolbarItems: [
     "heading",
     "bold",

@@ -1,65 +1,98 @@
 <template>
-  <div>
-      <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-  <el-radio-button :label="false">展开</el-radio-button>
-  <el-radio-button :label="true">收起</el-radio-button>
-</el-radio-group>
-<el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-  <el-submenu index="1">
-    <template slot="title">
-      <i class="el-icon-location"></i>
-      <span slot="title">导航一</span>
-    </template>
-    <el-menu-item-group>
-      <span slot="title">分组一</span>
-      <el-menu-item index="1-1">选项1</el-menu-item>
-      <el-menu-item index="1-2">选项2</el-menu-item>
-    </el-menu-item-group>
-    <el-menu-item-group title="分组2">
-      <el-menu-item index="1-3">选项3</el-menu-item>
-    </el-menu-item-group>
-    <el-submenu index="1-4">
-      <span slot="title">选项4</span>
-      <el-menu-item index="1-4-1">选项1</el-menu-item>
-    </el-submenu>
-  </el-submenu>
-  <el-menu-item index="2">
-    <i class="el-icon-menu"></i>
-    <span slot="title">导航二</span>
-  </el-menu-item>
-  <el-menu-item index="3" disabled>
-    <i class="el-icon-document"></i>
-    <span slot="title">导航三</span>
-  </el-menu-item>
-  <el-menu-item index="4">
-    <i class="el-icon-setting"></i>
-    <span slot="title">导航四</span>
-  </el-menu-item>
-</el-menu>
+  <div style="height:100%;display:flex">
+    <!-- <div class="sidebar-container">
+      <el-menu
+        default-active="2"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+        style="border-right:0px"
+        router
+      >
+        <el-menu-item index="1">
+          <i class="el-icon-picture"></i>
+          <span slot="title">图片库</span>
+        </el-menu-item>
+        <el-menu-item index="2">
+          <i class="el-icon-document-copy"></i>
+          <span slot="title">历史文章</span>
+        </el-menu-item>
+        <el-menu-item index="3">
+          <i class="el-icon-document"></i>
+          <span slot="title">保存的草稿</span>
+        </el-menu-item>
+        <el-menu-item index="4">
+          <i class="el-icon-setting"></i>
+          <span slot="title">导航四</span>
+        </el-menu-item>
+      </el-menu>
+      <div class="btn-group">
+        <el-button type="primary" class="btn">发布</el-button>
+        <el-button type="success" class="btn">保存</el-button>
+      </div>
+    </div>
+    <div class="sidebar-content">
+      <router-view />
+    </div> -->
+    <div class="editor-container">
+      <Mdeditor v-model="content"></Mdeditor>
+    </div>
   </div>
 </template>
 
-<style>
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
-  }
-</style>
-
 <script>
-  export default {
-    data() {
-      return {
-        isCollapse: true
-      };
+import Mdeditor from "@/components/editor/mdeditor-common-test.vue";
+export default {
+  data() {
+    return {
+      content: "",
+      isCollapse: true
+    };
+  },
+  components: {
+    Mdeditor
+  },
+  methods: {
+    handleUploadContent() {
+      this.$store.dispatch("editor/uploadContent", { content: this.content });
     },
-    methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
     }
   }
+};
 </script>
+<style scoped>
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+}
+.editor-container {
+  flex: 1;
+  /* min-width: 1342px; */
+  height: 400px;
+}
+.editor-navbar {
+  padding: 10px 0 5px 5px;
+}
+.sidebar-container {
+  height: 100%;
+}
+.sidebar-content {
+  flex: 1;
+  border-left: solid 1px #e6e6e6;
+}
+.btn-group {
+  padding-left: 50px;
+}
+.btn {
+  margin: 10px 0;
+  width: 100px;
+  display: block;
+}
+.el-button + .el-button {
+  margin-left: 0px;
+}
+</style>

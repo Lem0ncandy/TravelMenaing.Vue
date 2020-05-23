@@ -30,7 +30,6 @@ a {
   text-decoration: none;
 }
 
-
 .container {
   margin-right: auto;
   margin-left: auto;

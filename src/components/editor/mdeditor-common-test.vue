@@ -1,13 +1,15 @@
 <template>
-  <div id="markdown-editor"></div>
+    <div style="height:100%">
+      <button @click="bold">lll</button>
+    <div id="markdown-editor">
+    </div>
+    </div>
 </template>
 <script>
 import "codemirror/lib/codemirror.css";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import Editor from "@toast-ui/editor";
 import defaultOptions from "./defaultOptions";
-import eventBus from "@/utils/eventBus.js";
-
 export default {
   components: {},
   props: {
@@ -24,8 +26,8 @@ export default {
   },
   watch: {
     value(newValue, preValue) {
-      if (newValue !== preValue && preValue !== this.editor.getMarkdown()) {
-        this.editor.setMarkdown(newValue);
+      if (newValue !== preValue && newValue !== this.editor.getMarkdown()) {
+        this.editor.setValue(newValue);
       }
     }
   },
@@ -40,18 +42,13 @@ export default {
         this.$emit("input", this.editor.getMarkdown());
       });
     },
-    handleInsertImage(val) {
-      this.editor.exec("AddImage", {
-        altText: "",
-        imageUrl: val
-      });
+    bold(){
+      this.editor.exec("AddImage",{altText:'',imageUrl:"http://localhost:8080/img/p0.730d82ac.jpg"});
     }
   },
   mounted() {
     this.initEditor();
-    eventBus.$on("insert-img", val => {
-      this.handleInsertImage(val);
-    });
+    // this.addbutton();
   }
 };
 </script>

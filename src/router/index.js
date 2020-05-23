@@ -48,12 +48,12 @@ const routes = [
   {
     path: '/editor',
     name: 'Editor',
-    component: () => import('@/views/markdowned/index.vue')
-  },
-  {
-    path: '/editortest',
-    name: 'EditorTest',
-    component: () => import('@/views/markdowned/indextest.vue')
+    component: () => import('@/views/editor/index.vue'),
+    children:[{
+      path:'images',
+      name:'Images',
+      component: () => import('@/views/editor/components/images')
+    }]
   },
   {
     path: '/test',
