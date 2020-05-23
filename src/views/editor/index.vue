@@ -35,7 +35,7 @@
       <!-- <Images></Images> -->
     </div>
     <div class="editor-container">
-      <el-input v-model="title" placeholder="请输入标题" class="title" maxlength="20" show-word-limit></el-input>
+      <el-input v-model="title" placeholder="请输入标题" class="title" maxlength="100" show-word-limit></el-input>
       <Mdeditor v-model="content"></Mdeditor>
     </div>
     <el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
