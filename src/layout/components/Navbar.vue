@@ -64,7 +64,7 @@ export default {
         discover: "",
         category: "",
         myinfo: "user/1",
-        guide: "",
+        guides: "",
         logout: ""
       }
     };
