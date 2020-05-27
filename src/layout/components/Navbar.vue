@@ -4,27 +4,25 @@
       <img src="@/icons/nav-logo.png" class="navbar-icon" />
     </router-link>
     <el-row class="btn-ground">
-      <router-link :to="namedRoutes('Editor')" target="_blank">
+      <router-link :to="{name:'Editor'}" target="_blank">
         <el-button type="success">发布指南</el-button>
       </router-link>
-      <router-link :to="namedRoutes('Login')">
+      <router-link :to="{name:'Login'}">
         <el-button round v-if="!isLogin">登录</el-button>
       </router-link>
-      <router-link :to="namedRoutes('Signup')">
+      <router-link :to="{name:'Signup'}">
         <el-button type="primary" round v-if="!isLogin">注册</el-button>
       </router-link>
-      <el-dropdown trigger="hover" v-if="isLogin">
+      <el-dropdown trigger="hover" v-if="isLogin" @command="hangleSwitch">
         <div>
           <el-badge is-dot>
-            <router-link :to="namedRoutes('User')">
+            <router-link :to="{name:'UserGuide',params:{id:id}}">
               <el-avatar :src="require('@/assets/u332.png')" class="navbar-avatar"></el-avatar>
             </router-link>
           </el-badge>
         </div>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>
-            <router-link :to="namedRoutes('User')">我的指南</router-link>
-          </el-dropdown-item>
+          <el-dropdown-item command="User">我的指南</el-dropdown-item>
           <el-dropdown-item>
             评论
             <el-badge :value="12" />
@@ -70,14 +68,19 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('user',['isLogin'])
+    ...mapGetters("user", ["isLogin", "id", "name", "avator"])
   },
   methods: {
     async logout() {
-      console.log("click!");
       await this.$store.dispatch("user/logout");
       this.$forceUpdate();
     },
+    hangleSwitch(command) {
+      console.log(this.$route);
+      if (this.$route.name != command) {
+        this.$router.push({ name: command, params: { id: this.id } });
+      }
+    }
   }
 };
 </script>

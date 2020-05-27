@@ -1,4 +1,4 @@
-import { getOneGuide } from '@/api/viewer.js'
+import { getOneGuide } from '@/api/guide.js'
 
 const actions = {
     // getOneGuide({ commit }, id) {

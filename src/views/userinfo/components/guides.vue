@@ -14,7 +14,7 @@
 </template>
 <script>
 import ContentCard from "@/components/ContentCard.vue";
-import { getAllGuide } from "@/api/guide.js";
+import { getAllGuideByUserId } from "@/api/guide.js";
 export default {
   components: {
     ContentCard
@@ -49,16 +49,16 @@ export default {
       this.load();
       console.log(this.limit);
     },
-    getAllGuide() {
+    getAllGuideByUserId(id) {
       this.loading = true;
-      getAllGuide().then(reseponse => {
+      getAllGuideByUserId(id).then(reseponse => {
         this.guideList = reseponse.data;
         this.loading = false;
       });
     }
   },
   created() {
-    this.getAllGuide();
+    this.getAllGuideByUserId(this.$route.params.id);
   }
 };
 </script>

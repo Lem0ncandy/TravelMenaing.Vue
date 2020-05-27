@@ -14,9 +14,37 @@ const routes = [
       component: () => import('@/views/index/index.vue'),
     },
     {
-      path: '/user',
+      path: '/user/:id',
       name: 'User',
+      redirect: '/user/:id/guide',
       component: () => import('@/views/userinfo/index.vue'),
+      children: [
+        {
+          path: 'guide',
+          name: 'UserGuides',
+          component: () => import('@/views/userinfo/components/guides.vue')
+        },
+        {
+          path: 'comments',
+          name: 'UserComments',
+          component: () => import('@/views/userinfo/components/comments.vue')
+        },
+        {
+          path: 'dynamic',
+          name: 'UserDynamic',
+          component: () => import('@/views/userinfo/components/dynamic.vue')
+        },
+        {
+          path: 'fans',
+          name: 'UserFans',
+          component: () => import('@/views/userinfo/components/fans.vue')
+        },
+      ]
+    },
+    {
+      path: 'editUserInfo',
+      name: 'EditUserInfo',
+      component: () => import('@/views/userinfo/components/edituserinfo.vue')
     },
     {
       path: '/guide/:id',

@@ -1,9 +1,10 @@
 import { login, signup, logout } from '@/api/user.js'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken ,getId, setId, removeId} from '@/utils/auth'
 const getDefaultState = () => {
     return {
         name: '',
         avatar: '',
+        id:getId(),
         token: getToken(),
         // isLogin:state.token != null && state.token != '',
     }
@@ -13,10 +14,11 @@ const state = getDefaultState()
 
 const getters = {
     // token: state => state.user.token,
-    avatar: state => state.user.avatar,
+    avatar: state => state.avatar,
+    name: state => state.name,
+    id: state => state.id,
     isLogin: state => {
-        var result = state.token != null && state.token != '';
-        return result;
+        return state.token != null || state.token != undefined;
     }
 }
 
@@ -32,6 +34,9 @@ const mutations = {
     },
     SET_AVATAR: (state, avatar) => {
         state.avatar = avatar
+    },
+    SET_ID: (state, id) => {
+        state.id = id
     }
 }
 
@@ -42,7 +47,12 @@ const actions = {
             login({ username: username.trim(), password: password }).then(response => {
                 const { data } = response;
                 setToken(data.token);
+                setId(data.id);
                 commit('SET_TOKEN', data.token);
+                commit('SET_AVATAR', data.avatar);
+                commit('SET_ID', data.id);
+                console.log(data.id);
+                commit('SET_NAME', data.username);
                 resolve();
             }).catch(error => {
                 reject(error);
@@ -64,6 +74,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             setToken(null);
             removeToken();
+            removeId();
             // resetRouter();
             commit('RESET_STATE');
             resolve();
