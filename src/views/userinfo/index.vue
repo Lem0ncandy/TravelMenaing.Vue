@@ -9,7 +9,12 @@
             class="abstract"
           >桥都麻袋,这样子讲话有什么错吗?吶,告诉我啊。搜噶,你们已经不喜欢了啊…真是冷酷的人呢,果咩纳塞,让你看到不愉快的东西了。像我这样的人,果然消失就好了呢。也许只有在二次元的世界里,才有真正的美好存在的吧,吶?</div>
         </div>
-        <el-button style="float: right;" type="primary">关注</el-button>
+        <el-button
+          style="float: right;"
+          type="primary"
+          v-if="id !== $route.params.id"
+          @click="hadnleFollowButtonClick"
+        >{{type|typeFilter}}</el-button>
       </div>
       <el-divider></el-divider>
       <div class="cardgroud">
@@ -58,66 +63,91 @@
 </template>
 <script>
 import { getUserDetailInfo } from "@/api/user";
+import { changeRelationshipState } from "@/api/relationship";
+import { mapGetters } from "vuex";
+
 export default {
+  filters: {
+    typeFilter(type) {
+      const typeMap = {
+        0: "关注",
+        1: "已关注",
+        2: "已屏蔽"
+      };
+      return typeMap[type];
+    }
+  },
   methods: {
     handleClick(tab, event) {
       this.$router.push({ name: tab.name });
     },
-    getUserDetailInfo(id) {
+    fetchUserDetailInfo(id) {
       this.loading = true;
       getUserDetailInfo(id).then(response => {
         this.userDetailInfo = response.data;
+        this.type = response.data.type;
         this.loading = false;
       });
+    },
+    hadnleFollowButtonClick() {
+      changeRelationshipState({ id: this.$route.params.id, type: this.type === 1 ? 0: 1}).then(
+        response => {
+          if (response.data.isSucess) {
+            this.type = this.type === 1 ? 0: 1;
+          }
+        }
+      );
     }
   },
   data() {
     return {
       activeName: "UserGuides",
       userDetailInfo: null,
-      loading: true
+      loading: true,
+      type: 0
     };
   },
   computed: {
-    avatar: function(value){
+    ...mapGetters("user", ["id"]),
+    avatar: function(value) {
       return this.userDetailInfo.avatar;
     },
-    commentCount: function(){
+    commentCount: function() {
       return this.userDetailInfo.commentCount;
     },
-    fansCount: function(){
+    fansCount: function() {
       return this.userDetailInfo.fansCount;
     },
-    gender: function(){
+    gender: function() {
       return this.userDetailInfo.gender;
     },
-    guideCount: function(){
+    guideCount: function() {
       return this.userDetailInfo.guideCount;
     },
-    guidesUpVoteCount: function(){
+    guidesUpVoteCount: function() {
       return this.userDetailInfo.guidesUpVoteCount;
     },
-    location: function(){
+    location: function() {
       return this.userDetailInfo.location;
     },
-    occupation: function(){
+    occupation: function() {
       return this.userDetailInfo.occupation;
     },
-    phoneNumber: function(){
+    phoneNumber: function() {
       return this.userDetailInfo.phoneNumber;
     },
-    rolesStr: function(){
+    rolesStr: function() {
       return this.userDetailInfo.rolesStr;
     },
-    uId: function(){
+    uId: function() {
       return this.userDetailInfo.uId;
     },
-    username: function(){
+    username: function() {
       return this.userDetailInfo.username;
-    },
+    }
   },
   created() {
-    this.getUserDetailInfo(this.$route.params.id);
+    this.fetchUserDetailInfo(this.$route.params.id);
   }
 };
 </script>

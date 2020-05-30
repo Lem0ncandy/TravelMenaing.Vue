@@ -10,7 +10,10 @@
           <div style="font-size:14px;margin-top:10px;">{{comment.content}}</div>
           <div style="display:flex;font-size:12px;margin-top:10px;justify-content: space-between;">
             <div>{{comment.createTime}}</div>
-            <div>回复 {{comment.upVoteCount}}赞</div>
+            <div>
+            <el-button type="text">回复</el-button>
+            <el-button type="text">{{comment.upVoteCount}} 赞</el-button>
+            </div>
           </div>
         </div>
       </div>
@@ -18,10 +21,10 @@
     <el-pagination
       background
       layout="prev, pager, next"
-      :total="count"
-      :current-page="page"
+      :total="commentsCount"
+      :current-page="currentPage"
       :page-size="size"
-      @current-change="handlePageChange"
+      @current-change="handleCurrentChange"
       style="text-align: center"
     ></el-pagination>
   </div>
@@ -36,10 +39,10 @@ export default {
   data() {
     return {
       loading: true,
-      page: 1,
+      currentPage: 1,
       size: 5,
       comments: null,
-      count: 0
+      commentsCount: 0
     };
   },
   computed: {},
@@ -47,17 +50,18 @@ export default {
     getGuideComment(id, page, size) {
       this.loading = true;
       getGuideComment(id, page, size).then(response => {
-        this.count = response.data.count;
+        this.commentsCount = response.data.count;
         this.comments = response.data.comments;
         this.loading = false;
       });
     },
-    handlePageChange(page) {
-      this.getGuideComment(this.guideId, page, this.size);
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      this.getGuideComment(this.guideId, val, this.size);
     }
   },
   created() {
-    this.getGuideComment(this.guideId, this.page, this.size);
+    this.getGuideComment(this.guideId, this.currentPage, this.size);
   }
 };
 </script>

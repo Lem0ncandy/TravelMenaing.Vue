@@ -17,7 +17,7 @@
         <div>
           <el-badge is-dot>
             <router-link :to="{name:'UserGuide',params:{id:id}}">
-              <el-avatar :src="require('@/assets/u332.png')" class="navbar-avatar"></el-avatar>
+              <el-avatar :src="avatar" class="navbar-avatar"></el-avatar>
             </router-link>
           </el-badge>
         </div>
@@ -68,7 +68,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("user", ["isLogin", "id", "name", "avator"])
+    ...mapGetters("user", ["isLogin", "id", "name", "avatar"])
   },
   methods: {
     async logout() {
