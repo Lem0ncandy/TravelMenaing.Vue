@@ -1,5 +1,5 @@
 # travelmeaning
-
+Vue 2 + ElementUI + tui.editor + baidumap
 ## Project setup
 ```
 npm install
