@@ -26,6 +26,8 @@
     <el-card style="margin-top:20px">
       <Viewer v-bind:content="content"></Viewer>
     </el-card>
+    <el-button type="primary" style="width:100%" @click="dialogVisible = true">查看路线</el-button>
+
     <el-divider></el-divider>
     <div style="padding:0 20px;">
       <div style="display:flex;margin-bottom:20px">
@@ -41,15 +43,51 @@
       </div>
       <div style="display:flex">
         <div style="flex:1"></div>
-        <el-button type="primary" @click="handelReplyGuide" >发布</el-button>
+        <el-button type="primary" @click="handelReplyGuide">发布</el-button>
       </div>
-      <Comment :guideId="this.$route.params.id"></Comment>
     </div>
+    <el-dialog title="提示" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
+      <div style="width:100%;height:500px">
+      <baidu-map class="map">
+        <bm-view class="map"></bm-view>
+        <bm-driving
+          start="天通苑北"
+          end="宋家庄地铁站"
+          :auto-viewport="true"
+          policy="BMAP_DRIVING_POLICY_LEAST_DISTANCE"
+          :panel="false"
+          location="北京"
+          :waypoints="['西二旗','潭西胜境']"
+        ></bm-driving>
+        <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
+      </baidu-map>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <style scoped>
 .text-info {
   font-size: 12px;
+}
+.transition-box {
+  margin-bottom: 10px;
+  width: 200px;
+  height: 100px;
+  border-radius: 4px;
+  background-color: #409eff;
+  text-align: center;
+  color: #fff;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  margin-right: 20px;
+}
+.map {
+  width: 100%;
+  height: 100%;
 }
 </style>
 <script>
@@ -65,7 +103,8 @@ export default {
     return {
       guide: null,
       loading: true,
-      textarea: ""
+      textarea: "",
+      dialogVisible: false
     };
   },
   computed: {
@@ -107,6 +146,13 @@ export default {
         console.log(response.data.isSucess);
         // getCurrentGuide(guideId);
       });
+    },
+    handleClose(done) {
+      this.$confirm("确认关闭？")
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
     }
   },
   mounted() {

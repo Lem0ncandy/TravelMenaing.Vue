@@ -36,8 +36,7 @@
     <div class="container">
       <el-menu
         mode="horizontal"
-        text-color="#000000"
-        active-text-color="#169757"
+
         :default-active="activeName"
       >
         <el-menu-item index="index">首页</el-menu-item>
